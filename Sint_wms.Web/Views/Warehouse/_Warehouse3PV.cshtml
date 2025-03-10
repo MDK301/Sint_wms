@@ -1,0 +1,65 @@
+﻿@model List<StaffVM>
+
+
+<!-- Begin Page Content -->
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <h1 class="h3 mb-2 text-gray-800">Warehouse 3</h1>
+
+    <!-- Select table Example -->
+    <div class="dropdown shadow mb-4">
+
+        <input class="readonly form-control dropdown-toggle form-select w-50 d-inline-block" autocomplete="off" id="jsSelectedStaff" type="text" placeholder="Choose an option" data-toggle="dropdown" aria-expanded="false" />
+        <button type="submit" class="d-inline-block btn btn-primary" onclick="SearchStaff()">Search</button>
+        <div class="dropdown-menu" style="right: 0; left: auto;">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered dataTable d-table" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>Name</th>
+                                <th>Position</th>
+                                <th>Office</th>
+                                <th>Age</th>
+                                <th>Start date</th>
+                                <th>Salary</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            @foreach (var staff in Model)
+                            {
+                                <tr class="dropdown-item" style="cursor:pointer">
+                                    <td class="mainField">@staff.Name</td>
+                                    <td>@staff.Position</td>
+                                    <td>@staff.Office</td>
+                                    <td>@staff.Age</td>
+                                    <td>@staff.StartDate</td>
+                                    <td>@staff.Salary</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="jsStaffCard" class="mt-3">
+
+        </div>
+
+    </div>
+</div>
+
+<script src="~/js/dropdown-menu.js"></script>

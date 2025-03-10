@@ -1,0 +1,635 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sint_wms.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    <link href="lib/fontawesome-free/css/all.min.css" rel="stylesheet" asp-append-version="true" />
+    <link href="lib/datatables/datatables.bootstrap4.min.css" rel="stylesheet" asp-append-version="true" />
+
+    @await RenderSectionAsync("Styles", required: false)
+
+</head>
+<body id="wrapper">
+    <header>
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon">
+                    <img width="50px" height="50px" class="rounded-circle" src="~/img/logo_2.png" />
+                </div>
+                <div class="sidebar-brand-text mx-3">WMS </div>
+                @* <div class="sidebar-brand-text mx-3">WMS <sup>2</sup></div> *@
+            </a>
+
+            <!-- Divider -->
+            @* <hr class="sidebar-divider my-0"> *@
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+          @*   <div class="sidebar-heading">
+                Interface
+            </div> *@
+
+            <!-- Nav Item - Warehouse Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOperations"
+                   aria-expanded="true" aria-controls="collapseOperations">
+                    <i class="fas fa-fw fa-warehouse"></i>
+                    <span>Warehouse</span>
+                </a>
+                <div id="collapseOperations" class="collapse" aria-labelledby="headingOperations" data-parent="#accordionSidebar">
+                    <div class="text-white py-2 collapse-inner rounded">
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-li fa fa-home" style="font-size:10px"></i>
+                                <span>Operations</span>                                
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue"  onclick="AddTabPanel('inbount',' Inbound 1')">Inbound</a>
+                                @* <a class="dropdown-item text-blue"  href="buttons.html">Inbound</a> *@
+                                @* <a class="collapse-item text-white" onclick="AddTabPanel('warehouse1','WareHouse 1')">Warehouse 1</a> *@
+                                <a class="dropdown-item text-blue" href="buttons.html">Outbound</a>
+                            </div>
+                        </div>
+
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">                                
+                                <i class="fa-li far fa-folder-open" style="font-size:10px"></i>
+                                <span>Infor</span>
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Customer</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Product</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Supplier</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Mis charge</a>
+                            </div>
+                        </div>
+                        <div class="collapse-item p-0 dropright">
+                            <a class=" text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">                              
+                                <i class="fa-li fa fa-assistive-listening-systems" style="font-size:10px"></i>
+                                <span>System</span>
+                            </a>
+                            <div class="dropdown-menu p-0">
+                                <a class="dropdown-item text-blue" href="buttons.html">Location</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Email</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Company</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Bracode floor</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Setup lable printer</a>
+                            </div>
+                        </div>
+                        <div class="collapse-item p-0 dropright">
+                            <a class="dropdown-item text-blue collapse-item m-0 dropright" href="buttons.html">
+                                <i class="fa-li fa fa-chart-bar" style="font-size:10px"></i>
+                                <span>Capacity</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Report Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReport"
+                   aria-expanded="true" aria-controls="collapseReport">
+                    <i class="fas fa-fw fa-receipt"></i>
+                    <span>Report</span>
+                </a>
+                <div id="collapseReport" class="collapse" aria-labelledby="headingReport" data-parent="#accordionSidebar">
+                    <div class="text-white py-2 collapse-inner rounded">
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-li fa fa-archive " style="font-size:10px"></i>
+                                <span>Inventory</span>
+                                
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Inventory by date mfg</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Inventory Balance (F8)</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Inventory Customer</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Days of inventory</a>
+                            </div>
+                        </div>
+
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-li fa fa-receipt " style="font-size:10px"></i>
+                                <span>Inbound</span>
+                                
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Inbound Detail</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Order RO</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">WH</a>
+                            </div>
+                        </div>
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-li fa fa-receipt" style="font-size:10px"></i>
+                                <span>Outbound</span>
+                                
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Outbound Detail</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Order RO</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">BOL</a>
+                            </div>
+                        </div>
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                Weight list
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Input weight</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Output weight</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Weight</a>
+                            </div>
+                        </div>
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                Check data
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Item error</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Inventory item</a>
+                            </div>
+                        </div>
+
+                        <a class="dropdown-item text-blue" href="buttons.html">% Date</a>           
+                        <a class="dropdown-item text-blue" href="buttons.html">Miscellaneous</a>           
+                    </div>
+                </div>
+            </li>
+
+           
+
+            <!-- Nav Item - Tools Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTools"
+                   aria-expanded="true" aria-controls="collapseTools">
+                    <i class="fas fa-fw fa-tools"></i>
+                    <span>Tools</span>
+                </a>
+                <div id="collapseTools" class="collapse" aria-labelledby="headingTools" data-parent="#accordionSidebar">
+                    <div class="text-white py-2 collapse-inner rounded">
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                User
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Create account</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Change password</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">User account</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Activate</a>
+                            </div>
+                        </div>
+
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                View
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Item List (F9)</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Action Orders (F10)</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Orders (F11)</a>
+                            </div>
+                        </div>
+                        <div class="collapse-item p-0 dropright">
+                            <a class=" text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                Financial
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Billing report</a>
+                            </div>
+                        </div>
+
+                        <div class="collapse-item p-0 dropright">
+                            <a class=" text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                Audit
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Inventory</a>
+                            </div>
+                        </div>
+
+                        <div class="collapse-item p-0 dropright">
+                            <a class=" text-blue collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                Transfer
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item text-blue" href="buttons.html">Transfer 1</a>
+                                <a class="dropdown-item text-blue" href="buttons.html">Transfer 2</a>
+                            </div>
+                        </div>
+
+                        <a class="dropdown-item text-blue" href="buttons.html">Master Data</a>
+                        <a class="dropdown-item text-blue" href="buttons.html">Modify data</a>
+                        <a class="dropdown-item text-blue" href="buttons.html">Date change</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - History Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHistory"
+                   aria-expanded="true" aria-controls="collapseHistory">
+                    <i class="fas fa-fw fa-history"></i>
+                    <span>History</span>
+                </a>
+                <div id="collapseHistory" class="collapse" aria-labelledby="headingHelp" data-parent="#accordionSidebar">
+                    <div class="text-white py-2 collapse-inner rounded">
+                        <a class="collapse-item text-blue" href="buttons.html">Event</a>
+                        <a class="collapse-item text-blue" href="buttons.html">Change spot</a>
+                        <a class="collapse-item text-blue" href="buttons.html">Order</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - help Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHelp"
+                   aria-expanded="true" aria-controls="collapseHelp">
+                    <i class="fas fa-fw fa-hands-helping"></i>
+                    <span>Help</span>
+                </a>
+                <div id="collapseHelp" class="collapse" aria-labelledby="headingHelp" data-parent="#accordionSidebar">
+                    <div class="text-white py-2 collapse-inner rounded">
+                        <a class="collapse-item text-blue" href="buttons.html">Update version</a>
+                        <a class="collapse-item text-blue" href="buttons.html">Find file</a>
+                    </div>
+                </div>
+            </li>
+            
+           @*  <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWarehouse"
+                   aria-expanded="true" aria-controls="collapseWarehouse">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Warehouse test</span>
+                </a>         
+
+            <div id="collapseWarehouse" class="collapse" aria-labelledby="headingWarehouse" data-parent="#accordionSidebar">
+                <div class="py-2 collapse-inner rounded">
+                    <a class="collapse-item text-white" onclick="AddTabPanel('warehouse1','WareHouse 1')">Warehouse 1</a>
+                    <a class="collapse-item text-white" onclick="AddTabPanel('warehouse2','WareHouse 2')">Warehouse 2</a>
+                    <a class="collapse-item text-white" onclick="AddTabPanel('warehouse3','WareHouse 3')">Warehouse 3</a>
+                </div>
+            </div>
+            </li> *@
+
+            <!-- Nav Item - Report -->
+          @*   <li class="nav-item active">
+                <a class="nav-link" onclick="AddTabPanel('report','Report')">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Report</span>
+                </a>
+            </li> *@
+
+            <!-- Nav Item - History Collapse Menu -->
+      @*       <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHistory"
+                   aria-expanded="true" aria-controls="collapseHistory">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>History</span>
+                </a>
+                <div id="collapseHistory" class="collapse" aria-labelledby="headingHistory" data-parent="#accordionSidebar">
+                    <div class="text-white py-2 collapse-inner rounded">
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-white collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                History 1
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="buttons.html">History 1.1</a>
+                                <a class="dropdown-item" href="buttons.html">History 1.2</a>
+                            </div>
+                        </div>
+
+                        <div class="collapse-item p-0 dropright">
+                            <a class="text-white collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
+                                History 4
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="buttons.html">History 4.1</a>
+                                <a class="dropdown-item" href="buttons.html">History 4.2</a>
+                            </div>
+                        </div>
+          
+                        <a class="collapse-item text-white" href="buttons.html">History 2</a>
+                        <a class="collapse-item text-white" href="buttons.html">History 3</a>
+                    </div>
+                </div>
+            </li>
+ *@
+
+
+
+
+            <!-- Divider -->
+            @* <hr class="sidebar-divider"> *@
+        
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+    </header>
+    <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light bg-white topbar static-top shadow">
+
+            <!-- Sidebar Toggle (Topbar) -->
+            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                <i class="fa fa-bars"></i>
+            </button>
+
+            <!--Horizontal menu items-->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                        Warehouse
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Warehouse 1</a>
+                        <a class="dropdown-item" href="#">Warehouse 2</a>
+                        <a class="dropdown-item" href="#">Warehouse 3</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Report</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">History</a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-item" href="#" >History 1</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">History 1.1</a></li>
+                                <li><a class="dropdown-item" href="#">History 1.2</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="dropdown-item" href="#">History 2</a></li>
+                        <li><a class="dropdown-item" href="#">History 3</a></li>
+
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+
+            <!-- Topbar Search -->
+            <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                           aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="button">
+                            <i class="fas fa-search fa-sm"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Topbar Navbar -->
+            <ul class="navbar-nav ml-auto">
+
+                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-search fa-fw"></i>
+                    </a>
+                    <!-- Dropdown - Messages -->
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                         aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control bg-light border-0 small"
+                                       placeholder="Search for..." aria-label="Search"
+                                       aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="button">
+                                        <i class="fas fa-search fa-sm"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Alerts -->
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bell fa-fw"></i>
+                        <!-- Counter - Alerts -->
+                        <span class="badge badge-danger badge-counter">3+</span>
+                    </a>
+                    <!-- Dropdown - Alerts -->
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                         aria-labelledby="alertsDropdown">
+                        <h6 class="dropdown-header">
+                            Alerts Center
+                        </h6>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-primary">
+                                    <i class="fas fa-file-alt text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">December 12, 2019</div>
+                                <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-success">
+                                    <i class="fas fa-donate text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">December 7, 2019</div>
+                                $290.29 has been deposited into your account!
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-warning">
+                                    <i class="fas fa-exclamation-triangle text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">December 2, 2019</div>
+                                Spending Alert: We've noticed unusually high spending for your account.
+                            </div>
+                        </a>
+                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                    </div>
+                </li>
+
+                <!-- Nav Item - Messages -->
+                <li class="nav-item dropdown no-arrow mx-1">
+                    <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-envelope fa-fw"></i>
+                        <!-- Counter - Messages -->
+                        <span class="badge badge-danger badge-counter">7</span>
+                    </a>
+                    <!-- Dropdown - Messages -->
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                         aria-labelledby="messagesDropdown">
+                        <h6 class="dropdown-header">
+                            Message Center
+                        </h6>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                     alt="...">
+                                <div class="status-indicator bg-success"></div>
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate">
+                                    Hi there! I am wondering if you can help me with a
+                                    problem I've been having.
+                                </div>
+                                <div class="small text-gray-500">Emily Fowler · 58m</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                     alt="...">
+                                <div class="status-indicator"></div>
+                            </div>
+                            <div>
+                                <div class="text-truncate">
+                                    I have the photos that you ordered last month, how
+                                    would you like them sent to you?
+                                </div>
+                                <div class="small text-gray-500">Jae Chun · 1d</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                     alt="...">
+                                <div class="status-indicator bg-warning"></div>
+                            </div>
+                            <div>
+                                <div class="text-truncate">
+                                    Last month's report looks great, I am very happy with
+                                    the progress so far, keep up the good work!
+                                </div>
+                                <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                     alt="...">
+                                <div class="status-indicator bg-success"></div>
+                            </div>
+                            <div>
+                                <div class="text-truncate">
+                                    Am I a good boy? The reason I ask is because someone
+                                    told me that people say this to all dogs, even if they aren't good...
+                                </div>
+                                <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                    </div>
+                </li>
+
+                <div class="topbar-divider d-none d-sm-block"></div>
+
+                <!-- Nav Item - User Information -->
+                <li class="nav-item dropdown no-arrow">
+                    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                        <img class="img-profile rounded-circle"
+                             src="img/undraw_profile.svg">
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                         aria-labelledby="userDropdown">
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Profile
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Settings
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Activity Log
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                            Logout
+                        </a>
+                    </div>
+                </li>
+
+            </ul>
+
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Topbar -->
+        <ul class="nav nav-tabs" id="jsTabPanelWrapper">
+@*             <li class="nav-item position-relative">
+                <a class="nav-link pr-4 " onclick="activaTab('index')" data-toggle="tab" href="#index">
+                    Active
+                </a>
+                <span class="mr-2 close-icon" aria-hidden="true">&times;</span>
+            </li> *@  
+        </ul>
+        <!-- End of Topbar -->
+
+        <div id="jsTabContent" class="pb-3 tab-content h-100">
+
+@*             <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jsLoadingModal">
+                Launch demo modal
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="jsLoadingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="d-flex justify-content-center loadingIcon text-black">
+                        <div class="spinner-border align-self-center" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+       
+            </div> *@
+
+            @RenderBody()
+
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
+    <script src="~/js/site.min.js" asp-append-version="true"></script>
+	<script src="~/js/layout.js"></script>
+
+    <script src="~/lib/datatables/jquery.datatables.min.js" asp-append-version="true"></script>
+    <script src="~/lib/datatables/datatables.bootstrap4.min.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
