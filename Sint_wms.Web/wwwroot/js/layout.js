@@ -1,4 +1,4 @@
-
+﻿
 const ControllerName = {
     WareHouse: "Warehouse",
     Report: "Report"
@@ -61,3 +61,46 @@ function LoadTabContent(tabId, data) {
         $('.dataTable').DataTable();
     });
 }
+$(document).ready(function () {
+    // Chỉ áp dụng hiệu ứng dropdown cho sidebar
+    $("#accordionSidebar .nav-item.dropdown").hover(
+        function () {
+            let $menu = $(this).find("> .dropdown-menu");
+            let isSidebarMenu = $(this).parents("#accordionSidebar").length > 0;
+
+            if (isSidebarMenu) {
+                $menu.css({ position: "relative", left: "auto", top: "auto" });
+            } else {
+                let windowWidth = $(window).width();
+                let menuOffset = $(this).offset().left + $menu.outerWidth();
+                if (menuOffset > windowWidth) {
+                    $menu.css({ left: "auto", right: "100%" });
+                } else {
+                    $menu.css({ left: "100%", right: "auto" });
+                }
+            }
+
+            $menu.stop(true, true).fadeIn(200);
+        },
+        function () {
+            $(this).find("> .dropdown-menu").stop(true, true).fadeOut(200);
+        }
+    );
+
+    // Chỉ áp dụng hover cho submenu trong sidebar
+    $("#accordionSidebar .dropdown-submenu").hover(
+        function () {
+            $(this).find("> .dropdown-menu").stop(true, true).fadeIn(200);
+        },
+        function () {
+            $(this).find("> .dropdown-menu").stop(true, true).fadeOut(200);
+        }
+    );
+
+
+
+
+
+
+
+});
