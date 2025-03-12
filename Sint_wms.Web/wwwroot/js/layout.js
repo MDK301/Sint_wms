@@ -1,94 +1,11 @@
 ﻿
-const ControllerName = {
-    WareHouse: "Warehouse",
-    Report: "Report"
-}
-function AddTabPanel(tabId, tabName, data) {
-    var $tabPanelWrapper = $("#jsTabPanelWrapper");
-
-    var tabPanelItem = $tabPanelWrapper.find("a[href='#" + tabId + "']");
-
-    if (tabPanelItem.length)
-        return;
-
-    var tabPanelHtml = ` <li class="nav-item position-relative">
-                            <a class="nav-link pr-4 active" data-toggle="tab" href="#${tabId}">
-                                ${tabName}
-                            </a>
-                            <span class="mr-2 close-icon" onclick="RemoveTabPanel('${tabId}')" aria-hidden="true">&times;</span>
-                        </li>`
-
-    LoadTabContent(tabId, data);
-    $tabPanelWrapper.find("a.nav-link").removeClass('active');
-    $tabPanelWrapper.append(tabPanelHtml);
-};
-
-function RemoveTabPanel(tabId) {
-    var tabPanelItem = $("#jsTabPanelWrapper").find("a[href='#" + tabId + "']");
-    if (!tabPanelItem.length)
-        return;
-
-    tabPanelItem.closest('li').remove();
-    $("#jsTabContent .tab-pane#" + tabId).empty();
-};
-
-function LoadTabContent(tabId, data) {
-    var $tabContent = $("#jsTabContent");
-
-    var tabContentUrl = '';
-    switch (tabId) {
-        case "warehouse1":
-            tabContentUrl = `${ControllerName.WareHouse}/warehouse1`
-            break;
-        case "warehouse2":
-            tabContentUrl = `${ControllerName.WareHouse}/warehouse2`
-            break;
-        case "warehouse3":
-            tabContentUrl = `${ControllerName.WareHouse}/warehouse3`
-            break
-        case "report":
-            tabContentUrl = `${ControllerName.Report}/Index?id=${data}`
-            break;
-
-    }
-
-
-    var $tabPaneItem = $tabContent.find(".tab-pane#" + tabId)
-    $tabContent.find(".tab-pane").removeClass('active');
-    $tabPaneItem.addClass('active');
-
-    $tabPaneItem.load(tabContentUrl, () => {
-        $('.dataTable').DataTable();
-    });
-}
 $(document).ready(function () {
-    // Chỉ áp dụng hiệu ứng dropdown cho sidebar
-    $("#accordionSidebar .nav-item.dropdown").hover(
-        function () {
-            let $menu = $(this).find("> .dropdown-menu");
-            let isSidebarMenu = $(this).parents("#accordionSidebar").length > 0;
 
-            if (isSidebarMenu) {
-                $menu.css({ position: "relative", left: "auto", top: "auto" });
-            } else {
-                let windowWidth = $(window).width();
-                let menuOffset = $(this).offset().left + $menu.outerWidth();
-                if (menuOffset > windowWidth) {
-                    $menu.css({ left: "auto", right: "100%" });
-                } else {
-                    $menu.css({ left: "100%", right: "auto" });
-                }
-            }
+    $('.dropdown-toggle').off('click.bs.dropdown');
 
-            $menu.stop(true, true).fadeIn(200);
-        },
-        function () {
-            $(this).find("> .dropdown-menu").stop(true, true).fadeOut(200);
-        }
-    );
 
-    // Chỉ áp dụng hover cho submenu trong sidebar
-    $("#accordionSidebar .dropdown-submenu").hover(
+    // --- Topbar: Submenu mở khi di chuột vào ---
+    $("#accordionTopbar .nav-item").hover(
         function () {
             $(this).find("> .dropdown-menu").stop(true, true).fadeIn(200);
         },
@@ -97,10 +14,49 @@ $(document).ready(function () {
         }
     );
 
+    $("#accordionTopbar .dropdown-submenu").hover(
+        function () {
+            $(this).find("> .dropdown-menu").stop(true, true).fadeIn(200);
+        },
+        function () {
+            $(this).find("> .dropdown-menu").stop(true, true).fadeOut(200);
+        }
+    );
+
+    // Ngăn menu lớn ở topbar phản ứng khi click
+    $('#accordionTopbar .nav-item ').on('click', function (e) {
+        e.preventDefault();
+    });
 
 
 
 
 
+    // --- SIDEBAR: Menu lớn mở khi click, submenu mở khi hover ---
+    $('#accordionSidebar .nav-item.dropdown > a').on('click', function (e) {
+        e.preventDefault();
 
+        const $parent = $(this).parent();
+
+        // Nếu menu đang mở → Đóng menu
+        if ($parent.hasClass('show')) {
+            $parent.removeClass('show').find('.dropdown-menu').slideUp(200);
+        }
+        // Nếu menu đang đóng → Mở menu
+        else {
+            $('#accordionSidebar .nav-item').removeClass('show').find('.dropdown-menu').slideUp(900);
+
+        }
+        
+    });
+
+    $("#accordionSidebar .dropdown-submenu").hover(
+       
+    );
+
+    // Ngăn submenu trong sidebar đóng khi click vào trong
+    $('#accordionSidebar .dropdown-menu').on('click', function (e) {
+       
+    });
 });
+
