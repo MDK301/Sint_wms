@@ -21,9 +21,9 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
                 <div class="sidebar-brand-icon">
-                    <img width="50px" height="50px" class="rounded-circle" src="~/img/logo_2.png" />
+                    <img width="50px" height="50px" class="rounded-circle" src="~/img/logo_2.png" onclick="loadContent('warehouse')" />
                 </div>
                 <div class="sidebar-brand-text mx-3">WMS </div>
                 @* <div class="sidebar-brand-text mx-3">WMS <sup>2</sup></div> *@
@@ -210,15 +210,12 @@
 
             <!-- Nav Item - CrossDock Collapse Menu -->
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="crossdockDropdown">
                     <i class="fas fa-fw fa-truck"></i>
                     <span>Cross Dock</span>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Deliver Transport</a>
-                    </li>
-
+                <ul class="dropdown-menu" aria-labelledby="crossdockDropdown">              
+                    <li><a class="dropdown-item" href="#">Deliver Transport</a></li>
                     
                 </ul>
             </li>
