@@ -34,55 +34,23 @@ $(document).ready(function () {
 
 
     // --- SIDEBAR: Menu lớn mở khi click, submenu mở khi hover ---
-    $('#accordionSidebar .nav-item.dropdown > a').on('click', function (e) {
+    $('#accordionSidebar .nav-item .dropdown > a').on('click', function (e) {
         e.preventDefault();
 
         const $parent = $(this).parent();
 
         // Nếu menu đang mở → Đóng menu
         if ($parent.hasClass('show')) {
-            $parent.removeClass('show').find('.dropdown-menu').slideUp(200);
+            $parent.removeClass('show');
         }
         // Nếu menu đang đóng → Mở menu
         else {
-            $('#accordionSidebar .nav-item').removeClass('show').find('.dropdown-menu').slideUp(900);
+            $('#accordionSidebar .nav-item').removeClass('show');
 
         }
         
     });
 
-
-
-});
-function loadContent(url) {
-    $('#content-container').fadeOut(200, function () {
-        $.get(url).done(function (data) {
-                $('#content-container').html(data).fadeIn(200);
-            })
-            .fail(function () {
-                $('#content-container').html('<div class="alert alert-danger">Page not found!</div>').fadeIn(200);
-            });
-    });
-}
-// --- AJAX loading ---
-$(document).on('click', '.ajax-link', function (e) {
-    e.preventDefault();
-    let url = $(this).attr('href');
-
-    // Kiểm tra nếu URL có chứa "/#", thì loại bỏ nó
-    if (url.includes('/#')) {
-        url = url.replace('/#', '');
-    }
-
-    loadContent(url);
-    window.history.pushState(null, '', url); // Cập nhật URL mà không tải lại trang
-});
-
-window.onpopstate = function () {
-    loadContent(location.pathname);
-};
-
-$(document).ready(function () {
     $('a[data-load]').on('click', function (e) {
         e.preventDefault();
         let url = $(this).attr('href');
@@ -94,4 +62,34 @@ $(document).ready(function () {
     window.onpopstate = function () {
         loadContent(location.pathname);
     };
+    function loadContent(url) {
+        $('#content-container').fadeOut(200, function () {
+            $.get(url).done(function (data) {
+                $('#content-container').html(data).fadeIn(200);
+            })
+                .fail(function () {
+                    $('#content-container').html('<div class="alert alert-danger">Page not found!</div>').fadeIn(200);
+                });
+        });
+    }
+    // --- AJAX loading ---
+    $(document).on('click', '.ajax-link', function (e) {
+        e.preventDefault();
+        let url = $(this).attr('href');
+
+        // Kiểm tra nếu URL có chứa "/#", thì loại bỏ nó
+        if (url.includes('/#')) {
+            url = url.replace('/#', '');
+        }
+
+        loadContent(url);
+        window.history.pushState(null, '', url); // Cập nhật URL mà không tải lại trang
+    });
+
+    window.onpopstate = function () {
+        loadContent(location.pathname);
+    };
+
 });
+
+

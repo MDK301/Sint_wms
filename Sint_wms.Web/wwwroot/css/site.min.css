@@ -260,3 +260,9 @@ a.nav-item.dropdown::marker {
 #accordionSidebar .dropdown-submenu:hover > .dropdown-menu {
     display: block !important;
 }
+#content-container #accordionSidebar  {
+    display: none !important; /* Ẩn sidebar nếu bị render trong content */
+}
+#content-container #accordionTopbar {
+    display: none !important; /* Ẩn sidebar nếu bị render trong content */
+}
