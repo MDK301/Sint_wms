@@ -1,6 +1,7 @@
 ﻿
 $(document).ready(function () {
 
+
     $('.dropdown-toggle').off('click.bs.dropdown');
 
 
@@ -24,9 +25,9 @@ $(document).ready(function () {
     );
 
     // Ngăn menu lớn ở topbar phản ứng khi click
-    $('#accordionTopbar .nav-item ').on('click', function (e) {
-        e.preventDefault();
-    });
+    //$('#accordionTopbar .nav-item ').on('click', function (e) {
+    //    e.preventDefault();
+   // });
 
 
 
@@ -50,13 +51,47 @@ $(document).ready(function () {
         
     });
 
-    $("#accordionSidebar .dropdown-submenu").hover(
-       
-    );
 
-    // Ngăn submenu trong sidebar đóng khi click vào trong
-    $('#accordionSidebar .dropdown-menu').on('click', function (e) {
-       
+
+});
+function loadContent(url) {
+    $('#content-container').fadeOut(200, function () {
+        $.get(url).done(function (data) {
+                $('#content-container').html(data).fadeIn(200);
+            })
+            .fail(function () {
+                $('#content-container').html('<div class="alert alert-danger">Page not found!</div>').fadeIn(200);
+            });
     });
+}
+// --- AJAX loading ---
+$(document).on('click', '.ajax-link', function (e) {
+    e.preventDefault();
+    let url = $(this).attr('href');
+
+    // Kiểm tra nếu URL có chứa "/#", thì loại bỏ nó
+    if (url.includes('/#')) {
+        url = url.replace('/#', '');
+    }
+
+    loadContent(url);
+    window.history.pushState(null, '', url); // Cập nhật URL mà không tải lại trang
 });
 
+window.onpopstate = function () {
+    loadContent(location.pathname);
+};
+
+$(document).ready(function () {
+    $('a[data-load]').on('click', function (e) {
+        e.preventDefault();
+        let url = $(this).attr('href');
+        loadContent(url);
+        window.history.pushState(null, '', url); // Cập nhật URL mà không tải lại trang
+    });
+
+    // Quay lại trang trước trong lịch sử trình duyệt
+    window.onpopstate = function () {
+        loadContent(location.pathname);
+    };
+});

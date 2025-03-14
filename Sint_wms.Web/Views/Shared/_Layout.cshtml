@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿ 
+    @if (Context.Request.Headers["X-Requested-With"] == "XMLHttpRequest")
+    {
+        Layout = null; // Không dùng layout nếu là AJAX request
+    }
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -13,6 +18,7 @@
 
 </head>
 <body id="wrapper">
+
     <header>
 
 
@@ -35,10 +41,6 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-          @*   <div class="sidebar-heading">
-                Interface
-            </div> *@
 
             <!-- Nav Item - Warehouse Collapse Menu -->
             <li class="nav-item dropdown">
@@ -50,35 +52,32 @@
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" href="#">Operations</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inbound</a></li>
-                            <li><a class="dropdown-item " href="#">Outbound</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Operations/Inbound">Inbound</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Operations/Outbound">Outbound</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" href="#">Infor</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " href="#">Customer</a></li>
-                            <li><a class="dropdown-item" href="#">Product</a></li>
-                            <li><a class="dropdown-item " href="#">Supplier</a></li>
-                            <li><a class="dropdown-item " href="#">Mis charge</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Infor/Customers">Customers</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Infor/Products">Products</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Infor/Suppliers">Suppliers</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Infor/Misscharge">Miss charge</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
                         <a class="dropdown-item dropdown-toggle" href="#">System</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item " href="#">Location</a></li>
-                            <li><a class="dropdown-item " href="#">Email</a></li>
-                            <li><a class="dropdown-item " href="#">Company</a></li>
-                            <li><a class="dropdown-item " href="#">Barcode Floor</a></li>
-                            <li><a class="dropdown-item" href="#">Setup Label Printer</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Location">Location</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Email">Email</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Company">Company</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Barcodefloor">Barcode Floor</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Setuplabelprinter">Setup Label Printer</a></li>
                         </ul>
                     </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Capacity</a>
-                    </li>
+                    <li><a class="dropdown-item  ajax-link" href="/Warehouse/Capacity">Capacity</a></li>
                 </ul>
             </li>
-
 
             <!-- Nav Item - Report Collapse Menu -->
             <li class="nav-item dropdown">
@@ -87,58 +86,15 @@
                     <span>Report</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="reportDropdown">
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Inventory</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inventory by date mfg</a></li>
-                            <li><a class="dropdown-item" href="#">Inventory Balance (F8)</a></li>
-                            <li><a class="dropdown-item" href="#">Inventory Customer</a></li>
-                            <li><a class="dropdown-item" href="#">Days of inventory</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Inbound</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inbound Detail</a></li>
-                            <li><a class="dropdown-item" href="#">Order RO</a></li>
-                            <li><a class="dropdown-item" href="#">WH</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Outbound</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Outbound Detail</a></li>
-                            <li><a class="dropdown-item" href="#">Order RO</a></li>
-                            <li><a class="dropdown-item" href="#">BOL</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Weight list</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Input weight</a></li>
-                            <li><a class="dropdown-item" href="#">Output weight</a></li>
-                            <li><a class="dropdown-item" href="#">Weight</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Check data</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Item error</a></li>
-                            <li><a class="dropdown-item" href="#">Inventory item</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">% Date</a></li>
-                    <li><a class="dropdown-item" href="#">Miscellaneous</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/Inventory">Inventory</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/Inbound">Inbound</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/Outbound">Outbound</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/WeightList">Weight list</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/CheckData">Check data</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/Date">% Date</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/Miscellaneous">Miscellaneous</a></li>
                 </ul>
             </li>
-
-
-
 
             <!-- Nav Item - History Collapse Menu -->
             <li class="nav-item dropdown">
@@ -147,9 +103,9 @@
                     <span>History</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="historyDropdown">
-                    <li><a class="dropdown-item" href="#">Event</a></li>
-                    <li><a class="dropdown-item" href="#">Change Spot</a></li>
-                    <li><a class="dropdown-item" href="#">Order</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/History/Event">Event</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/History/ChangeSpot">Change Spot</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/History/Order">Order</a></li>
                 </ul>
             </li>
 
@@ -160,53 +116,12 @@
                     <span>Tools</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="toolsDropdown">
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">User</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Create account</a></li>
-                            <li><a class="dropdown-item" href="#">Change password</a></li>
-                            <li><a class="dropdown-item" href="#">User account</a></li>
-                            <li><a class="dropdown-item" href="#">Activate</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">View</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Item List (F9)</a></li>
-                            <li><a class="dropdown-item" href="#">Action Orders (F10)</a></li>
-                            <li><a class="dropdown-item" href="#">Orders (F11)</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Financial</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Billing report</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Audit</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inventory</a></li>
-                        </ul>
-                    </li>
-
-                    <li class="dropdown-submenu">
-                        <a class="dropdown-item dropdown-toggle" href="#">Transfer</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Transfer 1</a></li>
-                            <li><a class="dropdown-item" href="#">Transfer 2</a></li>
-                        </ul>
-                    </li>
-
-                    <li><a class="dropdown-item" href="#">Master Data</a></li>
-                    <li><a class="dropdown-item" href="#">Modify data</a></li>
-                    <li><a class="dropdown-item" href="#">Date change</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/User/CreateAccount">Create account</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/User/ChangePassword">Change password</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/User/UserAccount">User account</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/User/Activate">Activate</a></li>
                 </ul>
             </li>
-
 
             <!-- Nav Item - CrossDock Collapse Menu -->
             <li class="nav-item dropdown">
@@ -214,91 +129,23 @@
                     <i class="fas fa-fw fa-truck"></i>
                     <span>Cross Dock</span>
                 </a>
-                <ul class="dropdown-menu" aria-labelledby="crossdockDropdown">              
-                    <li><a class="dropdown-item" href="#">Deliver Transport</a></li>
-                    
+                <ul class="dropdown-menu" aria-labelledby="crossdockDropdown">
+                    <li><a class="dropdown-item  ajax-link" href="/CrossDock/DeliverTransport">Deliver Transport</a></li>
                 </ul>
             </li>
 
-
-            <!-- Nav Item - help Collapse Menu -->
+            <!-- Nav Item - Help Collapse Menu -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="helpDropdown">
                     <i class="fas fa-fw fa-hands-helping"></i>
                     <span>Help</span>
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="helpDropdown">
-                    <li><a class="dropdown-item" href="#">Update Version</a></li>
-                    <li><a class="dropdown-item" href="#">Find File</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Help/UpdateVersion">Update Version</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Help/FindFile">Find File</a></li>
                 </ul>
             </li>
 
-            
-           @*  <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseWarehouse"
-                   aria-expanded="true" aria-controls="collapseWarehouse">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Warehouse test</span>
-                </a>         
-
-            <div id="collapseWarehouse" class="collapse" aria-labelledby="headingWarehouse" data-parent="#accordionSidebar">
-                <div class="py-2 collapse-inner rounded">
-                    <a class="collapse-item text-white" onclick="AddTabPanel('warehouse1','WareHouse 1')">Warehouse 1</a>
-                    <a class="collapse-item text-white" onclick="AddTabPanel('warehouse2','WareHouse 2')">Warehouse 2</a>
-                    <a class="collapse-item text-white" onclick="AddTabPanel('warehouse3','WareHouse 3')">Warehouse 3</a>
-                </div>
-            </div>
-            </li> *@
-
-            <!-- Nav Item - Report -->
-          @*   <li class="nav-item active">
-                <a class="nav-link" onclick="AddTabPanel('report','Report')">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Report</span>
-                </a>
-            </li> *@
-
-            <!-- Nav Item - History Collapse Menu -->
-      @*       <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHistory"
-                   aria-expanded="true" aria-controls="collapseHistory">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>History</span>
-                </a>
-                <div id="collapseHistory" class="collapse" aria-labelledby="headingHistory" data-parent="#accordionSidebar">
-                    <div class="text-white py-2 collapse-inner rounded">
-                        <div class="collapse-item p-0 dropright">
-                            <a class="text-white collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-                                History 1
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="buttons.html">History 1.1</a>
-                                <a class="dropdown-item" href="buttons.html">History 1.2</a>
-                            </div>
-                        </div>
-
-                        <div class="collapse-item p-0 dropright">
-                            <a class="text-white collapse-item m-0 dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-                                History 4
-                            </a>
-                            <div class="dropdown-menu">
-                                <a class="dropdown-item" href="buttons.html">History 4.1</a>
-                                <a class="dropdown-item" href="buttons.html">History 4.2</a>
-                            </div>
-                        </div>
-          
-                        <a class="collapse-item text-white" href="buttons.html">History 2</a>
-                        <a class="collapse-item text-white" href="buttons.html">History 3</a>
-                    </div>
-                </div>
-            </li>
- *@
-
-
-
-
-            <!-- Divider -->
-            @* <hr class="sidebar-divider"> *@
         
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -331,34 +178,34 @@
                 <ul class="dropdown-menu">
 
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Operations</a>
+                        <a class="dropdown-item  ajax-link" href="#">Operations</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inbound</a></li>
-                            <li><a class="dropdown-item" href="#">Outbound</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Operations/Inbound">Inbound</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Operations/Outbound">Outbound</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Infor</a>
+                        <a class="dropdown-item  ajax-link" href="#">Infor</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Customers</a></li>
-                            <li><a class="dropdown-item" href="#">Products</a></li>
-                            <li><a class="dropdown-item" href="#">Suppliers</a></li>
-                            <li><a class="dropdown-item" href="#">Miss charge</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Infor/Customers">Customers</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Infor/Products">Products</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Infor/Suppliers">Suppliers</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/Infor/Misscharge">Miss charge</a></li>
                         </ul>
                     </li>
 
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">System</a>
+                        <a class="dropdown-item  ajax-link" href="#">System</a>
                         <ul class="dropdown-menu">  
-                            <li><a class="dropdown-item" href="#">Location</a></li>
-                            <li><a class="dropdown-item" href="#">Email</a></li>
-                            <li><a class="dropdown-item" href="#">Company</a></li>
-                            <li><a class="dropdown-item" href="#">Barcode Floor</a></li>
-                            <li><a class="dropdown-item" href="#">Setup Label Printer</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Location">Location</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Email">Email</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Company">Company</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Barcodefloor">Barcode Floor</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Warehouse/System/Setuplabelprinter">Setup Label Printer</a></li>
                         </ul>
                     </li>
-                    <li><a class="dropdown-item" href="#">Capacity</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Warehouse/Capacity">Capacity</a></li>
 
                 </ul>
             </li>
@@ -371,41 +218,41 @@
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Report</a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Inventory</a>
+                        <a class="dropdown-item  ajax-link" href="#">Inventory</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inventory by date mfg</a></li>
-                            <li><a class="dropdown-item" href="#">Inventory Balance (F8)</a></li>
-                            <li><a class="dropdown-item" href="#">Inventory Customer</a></li>
-                            <li><a class="dropdown-item" href="#">Days of inventory</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Inventory/Inventorybydatemfg">Inventory by date mfg</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Inventory/Inventorybalance">Inventory Balance (F8)</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Inventory/Inventorycustomer">Inventory Customer</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Inventory/Daysofnventory">Days of inventory</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Inbound</a>
+                        <a class="dropdown-item  ajax-link" href="#">Inbound</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inbound Detail</a></li>
-                            <li><a class="dropdown-item" href="#">Order RO</a></li>
-                            <li><a class="dropdown-item" href="#">WH</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Inbound/Inbounddetail">Inbound Detail</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Inbound/Orderro">Order RO</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Inbound/WH">WH</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Outbound</a>
+                        <a class="dropdown-item  ajax-link" href="#">Outbound</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Outbound Detail</a></li>
-                            <li><a class="dropdown-item" href="#">Order RO</a></li>
-                            <li><a class="dropdown-item" href="#">BOL</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Outbound/Outbounddetail">Outbound Detail</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Outbound/Orderro">Order RO</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Outbound/Bol">BOL</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Weight List</a>
+                        <a class="dropdown-item  ajax-link" href="#">Weight List</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Input weight</a></li>
-                            <li><a class="dropdown-item" href="#">Output weight</a></li>
-                            <li><a class="dropdown-item" href="#">Weight</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Weightlist/Inputweight">Input weight</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Weightlist/Outputweight">Output weight</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Report/Weightlist/Weight">Weight</a></li>
                         </ul>
                     </li>
-                    <li><a class="dropdown-item" href="#">Check Data</a></li>
-                    <li><a class="dropdown-item" href="#">% Date</a></li>
-                    <li><a class="dropdown-item" href="#">Miscellaneous</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/Checkdata">Check Data</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/Percentperdate">% Date</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Report/WeightMiscellaneous">Miscellaneous</a></li>
                 </ul>
             </li>
 
@@ -417,9 +264,9 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">History</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Event</a></li>
-                    <li><a class="dropdown-item" href="#">Change Spot</a></li>
-                    <li><a class="dropdown-item" href="#">Order</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/History/Event">Event</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/History/Changespot">Change Spot</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/History/Order">Order</a></li>
                 </ul>
             </li>
 
@@ -432,44 +279,44 @@
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Tools</a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">User</a>
+                        <a class="dropdown-item  ajax-link" href="#">User</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Create account</a></li>
-                            <li><a class="dropdown-item" href="#">Change password</a></li>
-                            <li><a class="dropdown-item" href="#">User account</a></li>
-                            <li><a class="dropdown-item" href="#">Activate</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/User/Createaccount">Create account</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/User/Changepassword">Change password</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/User/Useraccount">User account</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/User/Active">Activate</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">View</a>
+                        <a class="dropdown-item  ajax-link" href="#">View</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Item List (F9)</a></li>
-                            <li><a class="dropdown-item" href="#">Action Orders (F10)</a></li>
-                            <li><a class="dropdown-item" href="#">Orders (F11)</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/View/Itemlist">Item List (F9)</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/View/Actionorders">Action Orders (F10)</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/View/Orders">Orders (F11)</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Financial</a>
+                        <a class="dropdown-item  ajax-link" href="#">Financial</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Billing report</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/Financial/Billingreport">Billing report</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Audit</a>
+                        <a class="dropdown-item  ajax-link" href="#">Audit</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Inventory</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/Audit/Inventory">Inventory</a></li>
                         </ul>
                     </li>
                     <li class="dropdown-submenu">
-                        <a class="dropdown-item" href="#">Transfer</a>
+                        <a class="dropdown-item  ajax-link" href="#">Transfer</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Transfer 1</a></li>
-                            <li><a class="dropdown-item" href="#">Transfer 2</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/Transfer/Transfer1">Transfer 1</a></li>
+                            <li><a class="dropdown-item  ajax-link" href="/Tools/Transfer/Transfer2">Transfer 2</a></li>
                         </ul>
                     </li>
-                    <li><a class="dropdown-item" href="#">Master Data</a></li>
-                    <li><a class="dropdown-item" href="#">Modify data</a></li>
-                    <li><a class="dropdown-item" href="#">Date change</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/Transfer/Masterdata">Master Data</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/Transfer/Modifydata">Modify data</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/Transfer/Datechange">Date change</a></li>
                 </ul>
             </li>
 
@@ -478,7 +325,7 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Cross Dock</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Deliver Transport</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/Transfer/Delivertransport">Deliver Transport</a></li>
                 </ul>
             </li>
 
@@ -486,8 +333,8 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">Help</a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Update Version</a></li>
-                    <li><a class="dropdown-item" href="#">Find File</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/Transfer/Updateversion">Update Version</a></li>
+                    <li><a class="dropdown-item  ajax-link" href="/Tools/Transfer/Findfile">Find File</a></li>
                 </ul>
             </li>
 
@@ -675,20 +522,20 @@
                     <!-- Dropdown - User Information -->
                     <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                          aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item  ajax-link" href="#">
                             <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                             Profile
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item  ajax-link" href="#">
                             <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
                             Settings
                         </a>
-                        <a class="dropdown-item" href="#">
+                        <a class="dropdown-item  ajax-link" href="#">
                             <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
                             Activity Log
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <a class="dropdown-item  ajax-link" href="#" data-toggle="modal" data-target="#logoutModal">
                             <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                             Logout
                         </a>
@@ -719,30 +566,31 @@
 
 
 
-
+          <!--=============== Content ========================-->
         <div id="jsTabContent" class="pb-3 tab-content h-100">
 
-@*             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#jsLoadingModal">
-                Launch demo modal
-            </button>
+            <script>
+                function loadContent(url) {
+                    $('#content-container').fadeOut(100, function () {
+                        $.get(url, function (data) {
+                            $('#content-container').html(data).fadeIn(200);
+                        });
+                    });
+                }
 
-            <!-- Modal -->
-            <div class="modal fade" id="jsLoadingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="d-flex justify-content-center loadingIcon text-black">
-                        <div class="spinner-border align-self-center" role="status">
-                            <span class="sr-only">Loading...</span>
-                        </div>
-                    </div>
-                </div>
-       
-            </div> *@
-
-            @RenderBody()
-
+                
+            </script>
+            <div id="content-container">
+                @RenderBody()
+            </div>
         </div>
+        <!--=============== End of Content ========================-->
+
     </div>
+
+
+
+
 
     <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
