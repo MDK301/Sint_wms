@@ -46,7 +46,15 @@ app.UseAuthorization();
 
 app.Use(async (context, next) =>
 {
-    if (!context.User.Identity.IsAuthenticated && !context.Request.Path.StartsWithSegments("/Identity/Account/Login"))
+    // Cho phép truy cập các trang liên quan đến đăng nhập, đăng ký, quên mật khẩu mà không yêu cầu đăng nhập
+    var allowedPaths = new[]
+    {
+        "/Identity/Account/Login",
+        "/Identity/Account/Register",
+        "/Identity/Account/ForgotPassword"
+    };
+
+    if (!context.User.Identity.IsAuthenticated && !allowedPaths.Any(path => context.Request.Path.StartsWithSegments(path)))
     {
         context.Response.Redirect("/Identity/Account/Login");
         return;

@@ -6,6 +6,7 @@ namespace Sint_wms.Web.Controllers
 {
     public class WarehouseController : Controller
     {
+
         private readonly ILogger<WarehouseController> _logger;
 
         public WarehouseController(ILogger<WarehouseController> logger)

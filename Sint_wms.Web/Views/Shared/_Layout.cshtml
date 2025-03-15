@@ -405,7 +405,6 @@
 
 
 
-            </ul>
 
             <!-- Topbar Search -->
             <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -598,10 +597,16 @@
                             Activity Log
                         </a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item  ajax-link" href="#" data-toggle="modal" data-target="#logoutModal">
-                            <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                            Logout
-                        </a>
+
+<a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('logoutForm').submit();">
+    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+    Logout
+</a>
+
+<form id="logoutForm" method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" style="display: none;">
+</form>
+
+
                     </div>
                 </li>
 
