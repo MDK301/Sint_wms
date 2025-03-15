@@ -72,8 +72,11 @@ namespace Sint_wms.Web.Controllers
         // Hành động cho Inbound
         public IActionResult Inbound()
         {
-            return PartialView("Inbound");
+            return PartialView("Operations/Inbound");
         }
-
+        public IActionResult Test()
+        {
+            return PartialView("_Test");
+        }
     }
 }
