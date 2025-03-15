@@ -37,8 +37,6 @@ namespace Sint_wms.Web.Controllers
             }
         }
 
-
-
         public IActionResult Warehouse2()
         {
             using (StreamReader r = new StreamReader("TempData/staff_list.json"))
@@ -69,5 +67,13 @@ namespace Sint_wms.Web.Controllers
                 return PartialView("_StaffCardPV", staff);
             }
         }
+
+
+        // Hành động cho Inbound
+        public IActionResult Inbound()
+        {
+            return PartialView("Inbound");
+        }
+
     }
 }

@@ -1,0 +1,77 @@
+﻿@{
+    ViewData["Title"] = "Inbound Page";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="container">
+    <!-- Table 1: Inbound Data -->
+    <h3>Table 1: Inbound Data</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Column 1</th>
+                <th>Column 2</th>
+                <th>Column 3</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* Giả sử dữ liệu từ controller sẽ được truyền vào @Model hoặc bằng cách sử dụng ajax *@
+            @foreach (var item in Model)  
+            @* <!-- Giả sử bạn truyền dữ liệu cho table này từ Controller --> *@
+            {
+                <tr>
+                    @* <td>@item.Column1</td>
+                    <td>@item.Column2</td>
+                    <td>@item.Column3</td> *@
+                    <td>Column3</td>
+                    <td>Column3</td>
+                    <td>Column3</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Table 2: Inbound Details -->
+    <h3>Table 2: Inbound Details</h3>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Column A</th>
+                <th>Column B</th>
+                <th>Column C</th>
+            </tr>
+        </thead>
+        <tbody>
+            @* Tương tự, dữ liệu này có thể được truyền từ controller *@
+            @foreach (var detail in Model)  
+            @* <!-- Giả sử bạn truyền dữ liệu cho table này từ Controller --> *@
+            {
+                <tr>
+                    @* <td>@detail.ColumnA</td>
+                    <td>@detail.ColumnB</td>
+                    <td>@detail.ColumnC</td> *@
+                    <td>ColumnC</td>
+                    <td>ColumnC</td>
+                    <td>ColumnC</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Four function buttons -->
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <button class="btn btn-primary w-100">Function 1</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary w-100">Function 2</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary w-100">Function 3</button>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary w-100">Function 4</button>
+        </div>
+    </div>
+</div>
